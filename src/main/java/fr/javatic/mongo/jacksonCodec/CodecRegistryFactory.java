@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.bson.codecs.BsonValueCodecProvider;
 import org.bson.codecs.ValueCodecProvider;
 import org.bson.codecs.configuration.CodecRegistry;
-import org.bson.codecs.configuration.CodecRegistryHelper;
+import org.bson.codecs.configuration.CodecRegistries;
 
 import java.util.Arrays;
 
@@ -29,7 +29,7 @@ public class CodecRegistryFactory {
     }
 
     public static CodecRegistry getDefaultCodecRegistry(ObjectMapper bsonObjectMapper) {
-        return CodecRegistryHelper.fromProviders(Arrays.asList(
+        return CodecRegistries.fromProviders(Arrays.asList(
             new ValueCodecProvider(),
             new BsonValueCodecProvider(),
             new ObjectCodecProvider(bsonObjectMapper)
