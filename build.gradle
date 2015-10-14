@@ -27,7 +27,7 @@ targetCompatibility = 1.8
 def mongoVersion = '3.0.4'
 
 group = 'fr.javatic.mongo'
-version = "${mongoVersion}__0.1"
+version = "${mongoVersion}__0.2"
 
 repositories {
     mavenCentral()

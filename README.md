@@ -25,7 +25,7 @@ Maven
     <dependency>
       <groupId>fr.javatic.mongo</groupId>
       <artifactId>mongo-jackson-codec</artifactId>
-      <version>3.0.0-beta3__0.1</version>
+      <version>3.0.4__0.2</version>
       <scope>compile</scope>
     </dependency>
 
@@ -36,5 +36,10 @@ Gradle
     }
 
     dependencies {
-        compile 'fr.javatic.mongo:mongo-jackson-codec:3.0.0-beta3__0.1'
+        compile 'fr.javatic.mongo:mongo-jackson-codec:3.0.4__0.2'
     }
+
+Changelog
+----------
+0.1 Initial Release
+0.2 Update to mongo 3.0.4 (thanks to https://github.com/mkmelin)
