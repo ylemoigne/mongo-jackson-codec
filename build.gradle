@@ -24,7 +24,7 @@ apply plugin: 'maven-publish'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-def mongoVersion = '3.0.0-beta3'
+def mongoVersion = '3.0.4'
 
 group = 'fr.javatic.mongo'
 version = "${mongoVersion}__0.1"
