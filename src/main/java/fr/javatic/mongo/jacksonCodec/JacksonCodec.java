@@ -23,20 +23,21 @@ import org.bson.RawBsonDocument;
 import org.bson.codecs.Codec;
 import org.bson.codecs.DecoderContext;
 import org.bson.codecs.EncoderContext;
+import org.bson.codecs.configuration.CodecRegistry;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
 
-class JacksonMongoCodec<T> implements Codec<T> {
+class JacksonCodec<T> implements Codec<T> {
     private final ObjectMapper bsonObjectMapper;
     private final Codec<RawBsonDocument> rawBsonDocumentCodec;
     private final Class<T> type;
 
-    public JacksonMongoCodec(ObjectMapper bsonObjectMapper,
-                             Codec<RawBsonDocument> rawBsonDocumentCodec,
-                             Class<T> type) {
+    public JacksonCodec(ObjectMapper bsonObjectMapper,
+                        CodecRegistry codecRegistry,
+                        Class<T> type) {
         this.bsonObjectMapper = bsonObjectMapper;
-        this.rawBsonDocumentCodec = rawBsonDocumentCodec;
+        this.rawBsonDocumentCodec = codecRegistry.get(RawBsonDocument.class);
         this.type = type;
     }
 
