@@ -3,27 +3,26 @@ Mongo Codec using Jackson (and bson4jackson) for serialization
 
 Usage
 ------
-CodecRegistry codecRegistry = CodecRegistries.fromRegistries(MongoClient.getDefaultCodecRegistry(),
-                                                             CodecRegistries.fromProviders(new JacksonCodecProvider(
-                                                                                           ObjectMapperFactory.createObjectMapper())));
-
-MongoClientOptions clientOptions = MongoClientOptions.builder()
+    CodecRegistry codecRegistry = CodecRegistries.fromRegistries(MongoClient.getDefaultCodecRegistry(),
+                                                                 CodecRegistries.fromProviders(new JacksonCodecProvider(ObjectMapperFactory.createObjectMapper())));
+    
+    MongoClientOptions clientOptions = MongoClientOptions.builder()
                                                      .codecRegistry(codecRegistry)
                                                      .build();
-
-MongoClient client = new MongoClient(new ServerAddress(), options);
-
-MongoCollection<BlogPost> blogPosts = client.getDatabase("blog").getCollection("posts", BlogPost.class);
-
-BlogPost blogPost1 = new BlogPost("/first_blog",
+    
+    MongoClient client = new MongoClient(new ServerAddress(), options);
+    
+    MongoCollection<BlogPost> blogPosts = client.getDatabase("blog").getCollection("posts", BlogPost.class);
+    
+    BlogPost blogPost1 = new BlogPost("/first_blog",
                                   asList(new BlogPostComment(1, "First Comment"), new BlogPostComment(2, "Second Comment")));
-
-BlogPost blogPost2 = new BlogPost("/second_blog",
+    
+    BlogPost blogPost2 = new BlogPost("/second_blog",
                                   asList(new BlogPostComment(2, "First Comment"), new BlogPostComment(2, "Second Comment")));
-
-blogPosts.insertMany(asList(blogPost1, blogPost2));
-
-List<BlogPost> allBlogPosts = blogPosts.find().into(new ArrayList<>()));
+    
+    blogPosts.insertMany(asList(blogPost1, blogPost2));
+    
+    List<BlogPost> allBlogPosts = blogPosts.find().into(new ArrayList<>()));
 
 
 Mapping
@@ -55,4 +54,5 @@ Gradle
 Changelog
 ----------
 0.1 Initial Release
-0.2 Update to mongo 3.0.4 (thanks to https://github.com/mkmelin)
+
+0.2 Update to mongo 3.0.4 + test (thanks to https://github.com/mkmelin)
