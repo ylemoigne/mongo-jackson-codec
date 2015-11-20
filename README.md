@@ -3,14 +3,27 @@ Mongo Codec using Jackson (and bson4jackson) for serialization
 
 Usage
 ------
-CodecRegistry codecRegistry = CodecRegistryFactory.getDefaultCodecRegistry(ObjectMapperFactory.createObjectMapper());
+CodecRegistry codecRegistry = CodecRegistries.fromRegistries(MongoClient.getDefaultCodecRegistry(),
+                                                             CodecRegistries.fromProviders(new JacksonCodecProvider(
+                                                                                           ObjectMapperFactory.createObjectMapper())));
 
 MongoClientOptions clientOptions = MongoClientOptions.builder()
-            .clusterSettings(clusterSettings)
-            .codecRegistry(codecRegistry)
-            .build();
+                                                     .codecRegistry(codecRegistry)
+                                                     .build();
 
-MongoClient client = MongoClients.create(clientOptions);
+MongoClient client = new MongoClient(new ServerAddress(), options);
+
+MongoCollection<BlogPost> blogPosts = client.getDatabase("blog").getCollection("posts", BlogPost.class);
+
+BlogPost blogPost1 = new BlogPost("/first_blog",
+                                  asList(new BlogPostComment(1, "First Comment"), new BlogPostComment(2, "Second Comment")));
+
+BlogPost blogPost2 = new BlogPost("/second_blog",
+                                  asList(new BlogPostComment(2, "First Comment"), new BlogPostComment(2, "Second Comment")));
+
+blogPosts.insertMany(asList(blogPost1, blogPost2));
+
+List<BlogPost> allBlogPosts = blogPosts.find().into(new ArrayList<>()));
 
 
 Mapping

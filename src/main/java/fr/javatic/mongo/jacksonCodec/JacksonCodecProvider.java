@@ -22,15 +22,15 @@ import org.bson.codecs.Codec;
 import org.bson.codecs.configuration.CodecProvider;
 import org.bson.codecs.configuration.CodecRegistry;
 
-public class ObjectCodecProvider implements CodecProvider {
-    private ObjectMapper bsonObjectMapper;
+public class JacksonCodecProvider implements CodecProvider {
+    private final ObjectMapper bsonObjectMapper;
 
-    public ObjectCodecProvider(ObjectMapper bsonObjectMapper) {
+    public JacksonCodecProvider(final ObjectMapper bsonObjectMapper) {
         this.bsonObjectMapper = bsonObjectMapper;
     }
 
     @Override
-    public <T> Codec<T> get(Class<T> type, CodecRegistry registry) {
-        return new JacksonMongoCodec<>(bsonObjectMapper, registry.get(RawBsonDocument.class), type);
+    public <T> Codec<T> get(final Class<T> type, final CodecRegistry registry) {
+        return new JacksonCodec<>(bsonObjectMapper, registry, type);
     }
 }
