@@ -10,7 +10,7 @@ Usage
                                                      .codecRegistry(codecRegistry)
                                                      .build();
     
-    MongoClient client = new MongoClient(new ServerAddress(), options);
+    MongoClient client = new MongoClient(new ServerAddress(), clientOptions);
     
     MongoCollection<BlogPost> blogPosts = client.getDatabase("blog").getCollection("posts", BlogPost.class);
     
