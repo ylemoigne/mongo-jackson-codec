@@ -3,7 +3,7 @@ Mongo Codec using Jackson (and bson4jackson) for serialization
 
 Usage
 ------
-### Syncronous driver
+### Synchronous driver
 
     CodecRegistry codecRegistry = CodecRegistries.fromRegistries(MongoClient.getDefaultCodecRegistry(),
                                                                  CodecRegistries.fromProviders(new JacksonCodecProvider(ObjectMapperFactory.createObjectMapper())));
