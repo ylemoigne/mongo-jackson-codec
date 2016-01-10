@@ -22,7 +22,7 @@ Usage
     
     blogPosts.insertMany(asList(blogPost1, blogPost2));
     
-    List<BlogPost> allBlogPosts = blogPosts.find().into(new ArrayList<>()));
+    List<BlogPost> allBlogPosts = blogPosts.find().into(new ArrayList<>());
 
 
 Mapping
