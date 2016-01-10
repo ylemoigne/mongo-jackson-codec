@@ -51,6 +51,12 @@ Gradle
         compile 'fr.javatic.mongo:mongo-jackson-codec:3.0.4__0.2'
     }
 
+SBT
+
+    resolvers += "ylemoigne" at "http://dl.bintray.com/ylemoigne/maven"
+
+    libraryDependencies += "fr.javatic.mongo" % "mongo-jackson-codec" % "3.0.4__0.2"
+
 Changelog
 ----------
 0.1 Initial Release
