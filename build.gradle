@@ -28,7 +28,7 @@ def mongoVersion = '3.2.0'
 def bson4jacksonVersion = '2.6.0'
 
 group = 'fr.javatic.mongo'
-version = "${mongoVersion}__0.2"
+version = "${mongoVersion}__0.3"
 
 repositories {
     mavenCentral()

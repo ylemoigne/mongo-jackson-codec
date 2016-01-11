@@ -70,7 +70,7 @@ Maven
     <dependency>
       <groupId>fr.javatic.mongo</groupId>
       <artifactId>mongo-jackson-codec</artifactId>
-      <version>3.2.0__0.2</version>
+      <version>3.2.0__0.3</version>
       <scope>compile</scope>
     </dependency>
 
@@ -81,14 +81,14 @@ Gradle
     }
 
     dependencies {
-        compile 'fr.javatic.mongo:mongo-jackson-codec:3.2.0__0.2'
+        compile 'fr.javatic.mongo:mongo-jackson-codec:3.2.0__0.3'
     }
 
 SBT
 
     resolvers += "ylemoigne" at "http://dl.bintray.com/ylemoigne/maven"
 
-    libraryDependencies += "fr.javatic.mongo" % "mongo-jackson-codec" % "3.2.0__0.2"
+    libraryDependencies += "fr.javatic.mongo" % "mongo-jackson-codec" % "3.2.0__0.3"
 
 Changelog
 ----------
@@ -96,4 +96,4 @@ Changelog
 
 0.2 Update to mongo 3.0.4 + test (thanks to https://github.com/mkmelin)
 
-0.2 Update to mongo 3.2.0 (thanks to [greenled](https://github.com/greenled))
+0.3 Update to mongo 3.2.0 + documentation improvement (thanks to [greenled](https://github.com/greenled))
