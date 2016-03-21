@@ -77,7 +77,7 @@ Maven
 Gradle
 
     repositories {
-        maven { url "http://dl.bintray.com/ylemoigne/maven" }
+        maven { url "https://dl.bintray.com/ylemoigne/maven" }
     }
 
     dependencies {
@@ -86,7 +86,7 @@ Gradle
 
 SBT
 
-    resolvers += "ylemoigne" at "http://dl.bintray.com/ylemoigne/maven"
+    resolvers += "ylemoigne" at "https://dl.bintray.com/ylemoigne/maven"
 
     libraryDependencies += "fr.javatic.mongo" % "mongo-jackson-codec" % "3.2.0__0.3"
 
