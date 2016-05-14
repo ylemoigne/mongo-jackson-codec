@@ -97,3 +97,5 @@ Changelog
 0.2 Update to mongo 3.0.4 + test (thanks to https://github.com/mkmelin)
 
 0.3 Update to mongo 3.2.0 + documentation improvement (thanks to [greenled](https://github.com/greenled))
+
+0.4 @Id serializer/deserializer try to write standard json if JsonGenerator/JsonParser are not BSON

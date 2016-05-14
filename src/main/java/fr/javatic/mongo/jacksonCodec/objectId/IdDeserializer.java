@@ -16,9 +16,12 @@
 
 package fr.javatic.mongo.jacksonCodec.objectId;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
 import de.undercouch.bson4jackson.BsonConstants;
 import de.undercouch.bson4jackson.BsonParser;
 import de.undercouch.bson4jackson.deserializers.BsonDeserializer;
@@ -26,8 +29,16 @@ import de.undercouch.bson4jackson.types.ObjectId;
 
 import java.io.IOException;
 
-public class IdDeserializer extends BsonDeserializer<String> {
+public class IdDeserializer extends JsonDeserializer<String> {
     @Override
+    public String deserialize(JsonParser jsonParser, DeserializationContext ctxt)
+            throws IOException, JsonProcessingException {
+        if (!(jsonParser instanceof BsonParser)) {
+            return jsonParser.getValueAsString();
+        }
+        return deserialize((BsonParser)jsonParser, ctxt);
+    }
+
     public String deserialize(BsonParser bsonParser, DeserializationContext ctxt) throws IOException,
         JsonProcessingException {
         if (bsonParser.getCurrentToken() != JsonToken.VALUE_EMBEDDED_OBJECT ||

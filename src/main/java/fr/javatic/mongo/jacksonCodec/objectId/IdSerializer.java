@@ -17,7 +17,10 @@
 package fr.javatic.mongo.jacksonCodec.objectId;
 
 
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import de.undercouch.bson4jackson.BsonGenerator;
 import de.undercouch.bson4jackson.serializers.BsonSerializer;
@@ -25,8 +28,16 @@ import de.undercouch.bson4jackson.types.ObjectId;
 
 import java.io.IOException;
 
-public class IdSerializer extends BsonSerializer<String> {
+public class IdSerializer extends JsonSerializer<String> {
     @Override
+    public void serialize(String t, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
+        if (!(jsonGenerator instanceof BsonGenerator)) {
+            jsonGenerator.writeString(t);
+            return;
+        }
+        serialize(t, (BsonGenerator) jsonGenerator, serializerProvider);
+    }
+
     public void serialize(String s, BsonGenerator bsonGenerator, SerializerProvider serializerProvider) throws
         IOException, JsonProcessingException {
         if (s == null) {
