@@ -19,8 +19,11 @@ package fr.javatic.mongo.jacksonCodec;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.bson.types.ObjectId;
 
+import java.time.OffsetDateTime;
+
 public class BlogPost {
     private String id;
+    private OffsetDateTime offsetDateTime;
 
     @JsonProperty("_id")
     public String getId() {
@@ -30,6 +33,10 @@ public class BlogPost {
     public void setId(String id) {
         this.id = id;
     }
+
+
+    public OffsetDateTime getOffsetDateTime() {return offsetDateTime;}
+    public void setOffsetDateTime(OffsetDateTime offsetDateTime) {this.offsetDateTime = offsetDateTime;}
 
     @Override
     public boolean equals(final Object o) {

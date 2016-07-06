@@ -16,25 +16,34 @@
 
 package fr.javatic.mongo.jacksonCodec;
 
-import org.bson.BsonDocument;
-import org.bson.BsonDocumentReader;
-import org.bson.BsonDocumentWriter;
-import org.bson.BsonString;
-import org.bson.codecs.BsonDocumentCodec;
+import fr.javatic.mongo.jacksonCodec.javaTime.JavaTimeBsonModule;
+import org.bson.*;
 import org.bson.codecs.BsonValueCodecProvider;
 import org.bson.codecs.DecoderContext;
 import org.bson.codecs.EncoderContext;
-import org.bson.codecs.RawBsonDocumentCodec;
 import org.bson.codecs.configuration.CodecRegistries;
 import org.junit.Test;
+
+import java.time.OffsetDateTime;
 
 import static org.junit.Assert.assertEquals;
 
 public class JacksonCodecTest {
 
-    private final JacksonCodec<BlogPost> codec = new JacksonCodec<>(ObjectMapperFactory.createObjectMapper(),
-                                                                    CodecRegistries.fromProviders(new BsonValueCodecProvider()),
-                                                                    BlogPost.class);
+    private final JacksonCodec<BlogPost> codec = new JacksonCodec<>(
+            ObjectMapperFactory.createObjectMapper().registerModule(new JavaTimeBsonModule()),
+            CodecRegistries.fromProviders(new BsonValueCodecProvider()),
+            BlogPost.class);
+
+    private final OffsetDateTime testOffsetDateTime = OffsetDateTime.now();
+
+    private static BsonDocument createBlogPostBson(String id, OffsetDateTime offsetDateTime){
+        BsonDocument expectedDocument = new BsonDocument();
+        expectedDocument.put("offsetDateTime", new BsonDateTime(offsetDateTime.toInstant().toEpochMilli()));
+        expectedDocument.put("_id", new BsonString(id));
+
+        return expectedDocument;
+    }
 
     @Test
     public void testEncoderClass() {
@@ -47,22 +56,27 @@ public class JacksonCodecTest {
 
         BlogPost blogPost = new BlogPost();
         blogPost.setId("/first_blog");
+        blogPost.setOffsetDateTime(testOffsetDateTime);
 
         codec.encode(writer, blogPost, EncoderContext.builder().build());
 
-        assertEquals(new BsonDocument("_id", new BsonString(blogPost.getId())), writer.getDocument());
+        assertEquals(createBlogPostBson(blogPost.getId(), blogPost.getOffsetDateTime()), writer.getDocument());
     }
 
     @Test
     public void testDecoding() {
         String idValue = "/first_blog";
-        BsonDocumentReader reader = new BsonDocumentReader(new BsonDocument("_id", new BsonString(idValue)));
+        BsonDocumentReader reader = new BsonDocumentReader(createBlogPostBson(idValue, testOffsetDateTime));
 
         BlogPost blogPost = codec.decode(reader, DecoderContext.builder().build());
 
         BlogPost expectedBlogPost = new BlogPost();
         expectedBlogPost.setId(idValue);
+        expectedBlogPost.setOffsetDateTime(testOffsetDateTime);
 
         assertEquals(expectedBlogPost, blogPost);
+        assertEquals(testOffsetDateTime.toInstant(), blogPost.getOffsetDateTime().toInstant());
     }
+
+
 }
