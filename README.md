@@ -70,7 +70,7 @@ Maven
     <dependency>
       <groupId>fr.javatic.mongo</groupId>
       <artifactId>mongo-jackson-codec</artifactId>
-      <version>3.2.0__0.3</version>
+      <version>3.2.2__0.5</version>
       <scope>compile</scope>
     </dependency>
 
@@ -81,14 +81,14 @@ Gradle
     }
 
     dependencies {
-        compile 'fr.javatic.mongo:mongo-jackson-codec:3.2.0__0.3'
+        compile 'fr.javatic.mongo:mongo-jackson-codec:3.2.2__0.5'
     }
 
 SBT
 
     resolvers += "ylemoigne" at "https://dl.bintray.com/ylemoigne/maven"
 
-    libraryDependencies += "fr.javatic.mongo" % "mongo-jackson-codec" % "3.2.0__0.3"
+    libraryDependencies += "fr.javatic.mongo" % "mongo-jackson-codec" % "3.2.2__0.5"
 
 Changelog
 ----------
@@ -99,3 +99,5 @@ Changelog
 0.3 Update to mongo 3.2.0 + documentation improvement (thanks to [greenled](https://github.com/greenled))
 
 0.4 @Id serializer/deserializer try to write standard json if JsonGenerator/JsonParser are not BSON
+
+0.5 Update mongo driver (from 3.2.0 to 3.2.2) and bson4jackson (from 2.6.0 to 2.7.0) dependency.

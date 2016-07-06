@@ -24,11 +24,11 @@ apply plugin: 'maven-publish'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-def mongoVersion = '3.2.0'
-def bson4jacksonVersion = '2.6.0'
+def mongoVersion = '3.2.2'
+def bson4jacksonVersion = '2.7.0'
 
 group = 'fr.javatic.mongo'
-version = "${mongoVersion}__0.4"
+version = "${mongoVersion}__0.5"
 
 repositories {
     mavenCentral()
